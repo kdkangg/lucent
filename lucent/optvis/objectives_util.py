@@ -20,8 +20,8 @@ from __future__ import absolute_import, division, print_function
 
 def _make_arg_str(arg):
     arg = str(arg)
-    too_big = len(arg) > 15 or "\n" in arg
-    return "..." if too_big else arg
+    #too_big = len(arg) > 15 or "\n" in arg
+    return arg #"..." if too_big else arg
 
 
 def _extract_act_pos(acts, x=None, y=None):

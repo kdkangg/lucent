@@ -107,7 +107,7 @@ def render_vis(
                             f"(exception details: '{ex}')"
                         )
                 loss = objective_f(hook)
-                loss.backward()
+                loss.mean().backward()
                 return loss
                 
             optimizer.step(closure)

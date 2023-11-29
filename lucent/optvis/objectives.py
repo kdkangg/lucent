@@ -124,11 +124,17 @@ def neuron(layer, n_channel, x=None, y=None, batch=None):
 
 
 @wrap_objective()
-def channel(layer, n_channel, batch=None):
+def channel(layer, n_channel=None, batch=None):
     """Visualize a single channel"""
     @handle_batch(batch)
     def inner(model):
-        return -model(layer)[:, n_channel].mean()
+        try:
+            channel = -model(layer)[:, n_channel].mean() # batch channel patch patch for inception
+        except:
+            channel = -model(layer)[0].view(12, 197, -1) #for vit, it returns a tuple len 1. model(layer)[0] returns 1 patch hidden(768)
+            channel = channel[:, 1:, :][n_channel] #n_channel is actually used for specifying head here
+        return channel
+    
     return inner
 
 @wrap_objective()
