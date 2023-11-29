@@ -93,7 +93,7 @@ def compose(transforms):
 
 
 def _roundup(value):
-    return np.ceil(value).astype(int)
+    return int(np.ceil(value))
 
 
 def _rads2angle(angle, units):
